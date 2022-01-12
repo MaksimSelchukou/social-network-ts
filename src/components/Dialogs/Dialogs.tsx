@@ -18,6 +18,21 @@ const DialogItem = (props: DialogItemType) => {
 }
 
 export const Dialogs = () => {
+
+    const dialogsData =[
+        {id:1,name:"Tatiana"},
+        {id:2,name:"Maksim"},
+        {id:3,name:"Kirill"},
+        {id:4,name:"Roma"},
+        {id:5,name:"Veronika"},
+    ];
+
+    const messagesData =[
+        {id:1,message:"Hello"},
+        {id:2,message:"Bye-bye"},
+    ]
+
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>

@@ -1,8 +1,13 @@
 import React from 'react';
 import MyPosts from './MyPosts/MyPosts';
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
+import {postType} from "../../index";
 
-export const Profile = () => {
+type profileType={
+    post:Array<postType>
+}
+
+export const Profile = ({post,...props}:profileType) => {
     return (
         <div>
             {/*<div>*/}
@@ -13,7 +18,7 @@ export const Profile = () => {
             {/*    ava + description*/}
             {/*</div>*/}
             <ProfileInfo/>
-            <MyPosts/>
+            <MyPosts post={post}/>
         </div>
     )
 }

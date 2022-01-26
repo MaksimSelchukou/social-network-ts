@@ -3,15 +3,16 @@ import MyPosts from './MyPosts/MyPosts';
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {RootStateType} from "../../redux/state";
 
-type profileType={
-state:RootStateType
+type profileType = {
+    state: RootStateType
+    addPost: (postMessage: string) => void
 }
 
-export const Profile = (props:profileType) => {
+export const Profile = (props: profileType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts state={props.state}/>
+            <MyPosts state={props.state} addPost={props.addPost}/>
         </div>
     )
 }

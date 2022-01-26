@@ -5,11 +5,12 @@ import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Profile} from "./components/Profile/Profile";
-import {RootStateType} from "./redux/state";
+import { RootStateType} from "./redux/state";
 
 
 type AppPropsType = {
-   state:RootStateType
+    state: RootStateType
+    addPost: (postMessage: string) => void
 }
 
 
@@ -23,7 +24,7 @@ function App(props: AppPropsType) {
                     <Routes>
                         <Route path='/dialogs/*' element={<Dialogs state={props.state}/>}/>
                         {/*<Route path='/dialogs/*' element={<Dialogs state={props.state} messages={props.messages}/>}/>*/}
-                        <Route path='/profile/*' element={<Profile state={props.state}/>}/>
+                        <Route path='/profile/*' element={<Profile addPost={props.addPost} state={props.state}/>}/>
                     </Routes>
                 </div>
             </div>

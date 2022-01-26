@@ -1,4 +1,4 @@
-import React, {RefObject,Component} from 'react';
+import React, {RefObject, Component} from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
 
@@ -7,10 +7,11 @@ import {RootStateType} from "../../../redux/state";
 import {text} from "stream/consumers";
 
 type myPostType = {
-    state:RootStateType
+    state: RootStateType
+    addPost: (postMessage: string) => void
 }
 
-const MyPosts = (props:myPostType) => {
+const MyPosts = (props: myPostType) => {
 
     // const postData =[
     //     {id:1,message:"Hi, how are you?",likesCount:"0"},
@@ -24,11 +25,15 @@ const MyPosts = (props:myPostType) => {
     })
 
 
-    let newPostElement:any = React.createRef()
+    let newPostElement = React.createRef<HTMLTextAreaElement>()
 
-    const addPost = () =>{
-        let text = newPostElement.current.value;
-        alert(text)
+    const addPost = () => {
+        if(newPostElement.current){
+            let text = newPostElement.current.value;
+            props.addPost(text)
+             newPostElement.current.value = ""
+        }
+
 
     }
 

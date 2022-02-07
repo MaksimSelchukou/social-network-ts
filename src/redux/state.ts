@@ -1,4 +1,10 @@
-import {rerenderEntireTree} from "../render";
+let rerenderEntireTree = (state:any) => {
+    console.log('state changed')
+}
+
+// let rerenderEntireTree = () => {
+//     console.log('state changed')
+// }
 
 type DialogType = {
     id: number
@@ -25,7 +31,8 @@ export type RootStateType = {
     dialogsPage: dialogsPageType
 }
 
-export let state: RootStateType  = {  //    RootStateType
+
+export let state: RootStateType = {  //    RootStateType
     profilePage: {
         post: [
             {id: 1, message: "Hi, how are you?", likesCount: 0},
@@ -48,9 +55,17 @@ export let state: RootStateType  = {  //    RootStateType
     },
 }
 
+// @ts-ignore
+window.state = state;
+
 export let addPost = (postMessage: string) => {
-    debugger
-    let newPost:PostType = {id: 4, message: postMessage, likesCount: 0}
+    let newPost: PostType = {id: 4, message: postMessage, likesCount: 0}
     state.profilePage.post.push(newPost)
     rerenderEntireTree(state)
+    // rerenderEntireTree()
 }
+
+export const subscribe = (observer:any) => {
+    rerenderEntireTree = observer;
+}
+

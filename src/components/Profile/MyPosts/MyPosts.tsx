@@ -8,7 +8,8 @@ import {text} from "stream/consumers";
 
 type myPostType = {
     state: RootStateType
-    addPost: (postMessage: string) => void
+    // addPost: (postMessage: string) => void
+    dispatch: any
 }
 
 const MyPosts = (props: myPostType) => {
@@ -28,11 +29,11 @@ const MyPosts = (props: myPostType) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addPost = () => {
-        debugger
-        if(newPostElement.current){
+        // debugger
+        if (newPostElement.current) {
             let text = newPostElement.current.value;
-            props.addPost(text)
-             newPostElement.current.value = ""
+            props.dispatch({type: "ADD-POST", postMessage:text})
+            newPostElement.current.value = ""
         }
 
 

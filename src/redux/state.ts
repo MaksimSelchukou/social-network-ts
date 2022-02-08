@@ -56,17 +56,25 @@ export const store = {
     _callSubscriber (state:any) {
         console.log('state changed')
     },
-    addPost (postMessage: string) {
-        debugger
-        let newPost: PostType = {id: 4, message: postMessage, likesCount: 0}
-        this._state.profilePage.post.push(newPost)
-            this._callSubscriber(this._state)
-        // rerenderEntireTree()
-    },
     subscribe (observer:any) {
 
        this._callSubscriber = observer;
     },
+    dispatch(action:any){
+        if(action.type === "ADD-POST"){
+            let newPost: PostType = {id: 4, message: action.postMessage, likesCount: 0}
+            this._state.profilePage.post.push(newPost)
+            this._callSubscriber(this._state)
+        }
+
+    },
+    // addPost (postMessage: string) {
+    //     debugger
+    //     let newPost: PostType = {id: 4, message: postMessage, likesCount: 0}
+    //     this._state.profilePage.post.push(newPost)
+    //     this._callSubscriber(this._state)
+    //     // rerenderEntireTree()
+    // }
 
 }
 

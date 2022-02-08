@@ -1,10 +1,3 @@
-let rerenderEntireTree = (state:any) => {
-    console.log('state changed')
-}
-
-// let rerenderEntireTree = () => {
-//     console.log('state changed')
-// }
 
 type DialogType = {
     id: number
@@ -32,40 +25,86 @@ export type RootStateType = {
 }
 
 
-export let state: RootStateType = {  //    RootStateType
-    profilePage: {
-        post: [
-            {id: 1, message: "Hi, how are you?", likesCount: 0},
-            {id: 2, message: 'Its my first post', likesCount: 23},
-            {id: 3, message: 'Its my first post', likesCount: 21},
-        ]
+
+export const store = {
+    _state:{  //    RootStateType
+        profilePage: {
+            post: [
+                {id: 1, message: "Hi, how are you?", likesCount: 0},
+                {id: 2, message: 'Its my first post', likesCount: 23},
+                {id: 3, message: 'Its my first post', likesCount: 21},
+            ]
+        },
+        dialogsPage: {
+            dialogs: [
+                {id: 1, name: "Tatiana"},
+                {id: 2, name: "Maksim"},
+                {id: 3, name: "Kirill"},
+                {id: 4, name: "Roma"},
+                {id: 5, name: "Veronika"},
+            ],
+            messages: [
+                {id: 1, message: "Hello"},
+                {id: 2, message: "Bye-bye"},
+            ],
+        },
     },
-    dialogsPage: {
-        dialogs: [
-            {id: 1, name: "Tatiana"},
-            {id: 2, name: "Maksim"},
-            {id: 3, name: "Kirill"},
-            {id: 4, name: "Roma"},
-            {id: 5, name: "Veronika"},
-        ],
-        messages: [
-            {id: 1, message: "Hello"},
-            {id: 2, message: "Bye-bye"},
-        ],
+    getState (){
+        debugger
+        return this._state;
+},
+    _callSubscriber (state:any) {
+        console.log('state changed')
     },
+    addPost (postMessage: string) {
+        debugger
+        let newPost: PostType = {id: 4, message: postMessage, likesCount: 0}
+        this._state.profilePage.post.push(newPost)
+            this._callSubscriber(this._state)
+        // rerenderEntireTree()
+    },
+    subscribe (observer:any) {
+
+       this._callSubscriber = observer;
+    },
+
 }
+
+
+// export let state: RootStateType = {  //    RootStateType
+//     profilePage: {
+//         post: [
+//             {id: 1, message: "Hi, how are you?", likesCount: 0},
+//             {id: 2, message: 'Its my first post', likesCount: 23},
+//             {id: 3, message: 'Its my first post', likesCount: 21},
+//         ]
+//     },
+//     dialogsPage: {
+//         dialogs: [
+//             {id: 1, name: "Tatiana"},
+//             {id: 2, name: "Maksim"},
+//             {id: 3, name: "Kirill"},
+//             {id: 4, name: "Roma"},
+//             {id: 5, name: "Veronika"},
+//         ],
+//         messages: [
+//             {id: 1, message: "Hello"},
+//             {id: 2, message: "Bye-bye"},
+//         ],
+//     },
+// }
 
 // @ts-ignore
-window.state = state;
+window.store = store;
 
-export let addPost = (postMessage: string) => {
-    let newPost: PostType = {id: 4, message: postMessage, likesCount: 0}
-    state.profilePage.post.push(newPost)
-    rerenderEntireTree(state)
-    // rerenderEntireTree()
-}
+// export let addPost = (postMessage: string) => {
+//     let newPost: PostType = {id: 4, message: postMessage, likesCount: 0}
+//     state.profilePage.post.push(newPost)
+//     rerenderEntireTree(state)
+//     // rerenderEntireTree()
+// }
 
-export const subscribe = (observer:any) => {
-    rerenderEntireTree = observer;
-}
+// export const subscribe = (observer:any) => {
+//     rerenderEntireTree = observer;
+// }
 

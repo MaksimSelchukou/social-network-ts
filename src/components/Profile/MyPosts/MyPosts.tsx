@@ -3,13 +3,12 @@ import s from './MyPosts.module.css';
 import Post from './Post/Post';
 
 
-import {RootStateType} from "../../../redux/state";
+import {ActionsTypes, addPostAC, RootStateType} from "../../../redux/state";
 import {text} from "stream/consumers";
 
 type myPostType = {
     state: RootStateType
-    // addPost: (postMessage: string) => void
-    dispatch: any
+    dispatch:(action:ActionsTypes)=>void
 }
 
 const MyPosts = (props: myPostType) => {
@@ -32,7 +31,8 @@ const MyPosts = (props: myPostType) => {
         // debugger
         if (newPostElement.current) {
             let text = newPostElement.current.value;
-            props.dispatch({type: "ADD-POST", postMessage:text})
+            // props.dispatch({type: "ADD-POST", postMessage:text})
+            props.dispatch(addPostAC(text))
             newPostElement.current.value = ""
         }
 

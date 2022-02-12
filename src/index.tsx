@@ -5,7 +5,7 @@ import App from './App';
 import {RootStateType, store} from "./redux/state";
 
 
-export let rerenderEntireTree = (state: any) => {
+export let rerenderEntireTree = (state: RootStateType) => {
     ReactDOM.render(
         <React.StrictMode>
             <App state={store.getState()} dispatch={store.dispatch.bind(store)}/>

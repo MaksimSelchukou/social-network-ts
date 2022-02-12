@@ -9,16 +9,12 @@ export const Message = (props: MessageType) => {
 
    let newMessage:any = React.createRef()
 
-    const addNewMessage = () =>{
-        let message = newMessage.current.value;
-        alert(message)
-    }
+
 
     return (
         <div className={s.message}>
             {props.message}
-            <input ref={newMessage}/>
-            <button onClick={addNewMessage}>+</button>
+
         </div>
     )
 }

@@ -1,3 +1,4 @@
+import {text} from "stream/consumers";
 
 type DialogType = {
     id: number
@@ -18,16 +19,47 @@ type ProfilePageType = {
 type dialogsPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
+    newMessageBody: string
 }
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: dialogsPageType
 }
 
+export type storeType = {
+    _state: RootStateType
+    getState: () => RootStateType
+    _callSubscriber: (state: any) => void
+    subscribe: (observer: any) => void
+    dispatch: (action: ActionsTypes) => void
+
+}
+
+export type ActionsTypes = AddPostActionType | UpdateNewMessageActionType | sendMessageBodyType
+
+type AddPostActionType = {
+    type: "ADD-POST"
+    postMessage: string
+}
+
+type UpdateNewMessageActionType = {
+    type: "UPDATE-NEW-MESSAGE-BODY"
+    body: string
+
+}
+type sendMessageBodyType= {
+    type: "SEND-MESSAGE"
+
+}
 
 
-export const store = {
-    _state:{  //    RootStateType
+export const addPostAC = (text: string): AddPostActionType => ({type: "ADD-POST", postMessage: text});
+export const sendMessageBodyAC = (): sendMessageBodyType => ({type: "SEND-MESSAGE"});
+export const updateNewMessageBodyAC = (body: string): UpdateNewMessageActionType => ({type: "UPDATE-NEW-MESSAGE-BODY",body: body});
+
+
+export const store: storeType = {
+    _state: {  //    RootStateType
         profilePage: {
             post: [
                 {id: 1, message: "Hi, how are you?", likesCount: 0},
@@ -47,72 +79,36 @@ export const store = {
                 {id: 1, message: "Hello"},
                 {id: 2, message: "Bye-bye"},
             ],
+            newMessageBody: ""
         },
     },
-    getState (){
-        debugger
+    getState() {
         return this._state;
-},
-    _callSubscriber (state:any) {
+    },
+    _callSubscriber(state: any) {
         console.log('state changed')
     },
-    subscribe (observer:any) {
-
-       this._callSubscriber = observer;
+    subscribe(observer: any) {
+        // subscribe(callback: () => void) {
+        this._callSubscriber = observer;
     },
-    dispatch(action:any){
-        if(action.type === "ADD-POST"){
+    dispatch(action: any) {
+        if (action.type === "ADD-POST") {
             let newPost: PostType = {id: 4, message: action.postMessage, likesCount: 0}
             this._state.profilePage.post.push(newPost)
             this._callSubscriber(this._state)
+        } else if (action.type === "SEND-MESSAGE") {
+            let body = this._state.dialogsPage.newMessageBody
+            this._state.dialogsPage.newMessageBody = ""
+            this._state.dialogsPage.messages.push({id: 5, message: body})
+            this._callSubscriber(this._state)
+        } else if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
+            this._state.dialogsPage.newMessageBody = action.body
+            this._callSubscriber(this._state)
         }
-
     },
-    // addPost (postMessage: string) {
-    //     debugger
-    //     let newPost: PostType = {id: 4, message: postMessage, likesCount: 0}
-    //     this._state.profilePage.post.push(newPost)
-    //     this._callSubscriber(this._state)
-    //     // rerenderEntireTree()
-    // }
-
 }
-
-
-// export let state: RootStateType = {  //    RootStateType
-//     profilePage: {
-//         post: [
-//             {id: 1, message: "Hi, how are you?", likesCount: 0},
-//             {id: 2, message: 'Its my first post', likesCount: 23},
-//             {id: 3, message: 'Its my first post', likesCount: 21},
-//         ]
-//     },
-//     dialogsPage: {
-//         dialogs: [
-//             {id: 1, name: "Tatiana"},
-//             {id: 2, name: "Maksim"},
-//             {id: 3, name: "Kirill"},
-//             {id: 4, name: "Roma"},
-//             {id: 5, name: "Veronika"},
-//         ],
-//         messages: [
-//             {id: 1, message: "Hello"},
-//             {id: 2, message: "Bye-bye"},
-//         ],
-//     },
-// }
 
 // @ts-ignore
 window.store = store;
-
-// export let addPost = (postMessage: string) => {
-//     let newPost: PostType = {id: 4, message: postMessage, likesCount: 0}
-//     state.profilePage.post.push(newPost)
-//     rerenderEntireTree(state)
-//     // rerenderEntireTree()
-// }
-
-// export const subscribe = (observer:any) => {
-//     rerenderEntireTree = observer;
-// }
 

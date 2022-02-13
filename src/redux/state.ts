@@ -1,4 +1,6 @@
 import {text} from "stream/consumers";
+import {AddPostActionType, profileReducer} from "./profile-reducer";
+import {dialogsReducer, sendMessageBodyType, UpdateNewMessageActionType} from "./dialogs-reducer";
 
 type DialogType = {
     id: number
@@ -8,7 +10,7 @@ type MessageType = {
     id: number
     message: string
 }
-type PostType = {
+export type PostType = {
     id: number
     message: string
     likesCount: number
@@ -34,28 +36,31 @@ export type storeType = {
     dispatch: (action: ActionsTypes) => void
 
 }
-
+//
 export type ActionsTypes = AddPostActionType | UpdateNewMessageActionType | sendMessageBodyType
+//
+// type AddPostActionType = {
+//     type: "ADD-POST"
+//     postMessage: string
+// }
+//
+// type UpdateNewMessageActionType = {
+//     type: "UPDATE-NEW-MESSAGE-BODY"
+//     body: string
+//
+// }
+// type sendMessageBodyType = {
+//     type: "SEND-MESSAGE"
+//
+// }
 
-type AddPostActionType = {
-    type: "ADD-POST"
-    postMessage: string
-}
 
-type UpdateNewMessageActionType = {
-    type: "UPDATE-NEW-MESSAGE-BODY"
-    body: string
-
-}
-type sendMessageBodyType= {
-    type: "SEND-MESSAGE"
-
-}
-
-
-export const addPostAC = (text: string): AddPostActionType => ({type: "ADD-POST", postMessage: text});
-export const sendMessageBodyAC = (): sendMessageBodyType => ({type: "SEND-MESSAGE"});
-export const updateNewMessageBodyAC = (body: string): UpdateNewMessageActionType => ({type: "UPDATE-NEW-MESSAGE-BODY",body: body});
+// export const addPostAC = (text: string): AddPostActionType => ({type: "ADD-POST", postMessage: text});
+// export const sendMessageBodyAC = (): sendMessageBodyType => ({type: "SEND-MESSAGE"});
+// export const updateNewMessageBodyAC = (body: string): UpdateNewMessageActionType => ({
+//     type: "UPDATE-NEW-MESSAGE-BODY",
+//     body: body
+// });
 
 
 export const store: storeType = {
@@ -92,22 +97,27 @@ export const store: storeType = {
         // subscribe(callback: () => void) {
         this._callSubscriber = observer;
     },
+    // dispatch(action: any) {
+    //     if (action.type === "ADD-POST") {
+    //         let newPost: PostType = {id: 4, message: action.postMessage, likesCount: 0}
+    //         this._state.profilePage.post.push(newPost)
+    //         this._callSubscriber(this._state)
+    //     } else if (action.type === "SEND-MESSAGE") {
+    //         let body = this._state.dialogsPage.newMessageBody
+    //         this._state.dialogsPage.newMessageBody = ""
+    //         this._state.dialogsPage.messages.push({id: 5, message: body})
+    //         this._callSubscriber(this._state)
+    //     } else if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
+    //         this._state.dialogsPage.newMessageBody = action.body
+    //         this._callSubscriber(this._state)
+    //     }
     dispatch(action: any) {
-        if (action.type === "ADD-POST") {
-            let newPost: PostType = {id: 4, message: action.postMessage, likesCount: 0}
-            this._state.profilePage.post.push(newPost)
-            this._callSubscriber(this._state)
-        } else if (action.type === "SEND-MESSAGE") {
-            let body = this._state.dialogsPage.newMessageBody
-            this._state.dialogsPage.newMessageBody = ""
-            this._state.dialogsPage.messages.push({id: 5, message: body})
-            this._callSubscriber(this._state)
-        } else if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
-            this._state.dialogsPage.newMessageBody = action.body
-            this._callSubscriber(this._state)
-        }
-    },
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._callSubscriber(this._state)
+    }
 }
+
 
 // @ts-ignore
 window.store = store;

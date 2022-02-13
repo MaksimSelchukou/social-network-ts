@@ -3,7 +3,8 @@ import s from './MyPosts.module.css';
 import Post from './Post/Post';
 
 
-import {ActionsTypes, addPostAC, RootStateType} from "../../../redux/state";
+import {ActionsTypes, RootStateType} from "../../../redux/state";
+import { addPostAC} from "../../../redux/profile-reducer";
 import {text} from "stream/consumers";
 
 type myPostType = {

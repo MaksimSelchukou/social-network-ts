@@ -2,7 +2,8 @@ import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogsItem/DialogsItem";
 import {Message} from "./Message/Message";
-import {ActionsTypes, RootStateType, sendMessageBodyAC, updateNewMessageBodyAC} from "../../redux/state";
+import {ActionsTypes, RootStateType,} from "../../redux/state";
+import {sendMessageBodyAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
 
 
 type DialogsPropsType = {
@@ -24,7 +25,6 @@ export const Dialogs = (props: DialogsPropsType) => {
 
 
     const addNewMessage = () => {
-        // props.dispatch(updateNewMessageBodyAC(body))
         props.dispatch(sendMessageBodyAC())
     }
 
@@ -43,7 +43,7 @@ export const Dialogs = (props: DialogsPropsType) => {
             <div className={s.messages}>
                 <div>{messagesElements}</div>
                 <div>
-                    <div><textarea onChange={onNewMessageChange}  placeholder="message"></textarea></div>
+                    <div><textarea value={newMessageBody} onChange={onNewMessageChange}  placeholder="message"></textarea></div>
                     <div>
                         <button onClick={addNewMessage}>+</button>
                     </div>

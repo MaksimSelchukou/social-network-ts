@@ -4,36 +4,27 @@ import Post from './Post/Post';
 
 
 import {ActionsTypes, RootStateType} from "../../../redux/state";
-import { addPostAC} from "../../../redux/profile-reducer";
-import {text} from "stream/consumers";
 
 type myPostType = {
     state: RootStateType
-    dispatch:(action:ActionsTypes)=>void
+    dispatch: (action: ActionsTypes) => void
+    addPost: (text:any) => void
 }
 
 const MyPosts = (props: myPostType) => {
-
-    // const postData =[
-    //     {id:1,message:"Hi, how are you?",likesCount:"0"},
-    //     {id:2,message:'Its my first post',likesCount:"23"},
-    // ]
-
-    let postsElements = props.state.profilePage.post.map(m => {
-        return (
-            <Post message={m.message} likesCount={m.likesCount}/>
-        )
+    let postsElements
+        = props.state.profilePage.post.map(m => {
+        return (<Post message={m.message} likesCount={m.likesCount}/>)
     })
 
 
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
-    const addPost = () => {
-        // debugger
+    const onAddPost = () => {
+
         if (newPostElement.current) {
             let text = newPostElement.current.value;
-            // props.dispatch({type: "ADD-POST", postMessage:text})
-            props.dispatch(addPostAC(text))
+            props.addPost(text)
             newPostElement.current.value = ""
         }
 
@@ -48,7 +39,7 @@ const MyPosts = (props: myPostType) => {
                     <textarea ref={newPostElement}></textarea>
                 </div>
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={onAddPost}>Add post</button>
                 </div>
             </div>
             <div className={s.posts}>

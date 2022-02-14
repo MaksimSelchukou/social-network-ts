@@ -38,29 +38,6 @@ export type storeType = {
 }
 //
 export type ActionsTypes = AddPostActionType | UpdateNewMessageActionType | sendMessageBodyType
-//
-// type AddPostActionType = {
-//     type: "ADD-POST"
-//     postMessage: string
-// }
-//
-// type UpdateNewMessageActionType = {
-//     type: "UPDATE-NEW-MESSAGE-BODY"
-//     body: string
-//
-// }
-// type sendMessageBodyType = {
-//     type: "SEND-MESSAGE"
-//
-// }
-
-
-// export const addPostAC = (text: string): AddPostActionType => ({type: "ADD-POST", postMessage: text});
-// export const sendMessageBodyAC = (): sendMessageBodyType => ({type: "SEND-MESSAGE"});
-// export const updateNewMessageBodyAC = (body: string): UpdateNewMessageActionType => ({
-//     type: "UPDATE-NEW-MESSAGE-BODY",
-//     body: body
-// });
 
 
 export const store: storeType = {

@@ -3,12 +3,13 @@ import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogsItem/DialogsItem";
 import {Message} from "./Message/Message";
 import {ActionsTypes, RootStateType,} from "../../redux/state";
-import {sendMessageBodyAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
 
 
 type DialogsPropsType = {
     state: RootStateType
     dispatch:(action:ActionsTypes)=>void
+    sendMessage:()=>void
+    updateNewMessageBody:(body:string)=>void
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -25,12 +26,14 @@ export const Dialogs = (props: DialogsPropsType) => {
 
 
     const addNewMessage = () => {
-        props.dispatch(sendMessageBodyAC())
+        // props.dispatch(sendMessageBodyAC())
+        props.sendMessage()
     }
 
     const onNewMessageChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
        let body = event.currentTarget.value
-        props.dispatch(updateNewMessageBodyAC(body))
+        props.updateNewMessageBody(body)
+        // props.dispatch(updateNewMessageBodyAC(body))
 
     }
 
@@ -53,7 +56,3 @@ export const Dialogs = (props: DialogsPropsType) => {
         </div>
     )
 }
-
-
-// <input ref={newMessage}/>
-// <button onClick={addNewMessage}>+</button>

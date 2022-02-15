@@ -9,21 +9,20 @@ import {text} from "stream/consumers";
 import MyPosts from "./MyPosts";
 
 type myPostType = {
-    state: RootStateType
-    dispatch: (action: ActionsTypes) => void
+    // state: RootStateType
+    // dispatch: (action: ActionsTypes) => void
+    store:any
 }
 
 export const MyPostsContainer = (props: myPostType) => {
-    // let state = props.store.getState()
+     let state = props.store.getState()
 
 
     const addPost = (text: any) => {
-        props.dispatch(addPostAC(text))
-
-
+        props.store.dispatch(addPostAC(text))
     }
 
     return (
-        <MyPosts state={props.state} dispatch={props.dispatch} addPost={addPost}/>
+        <MyPosts state={state} dispatch={props.store.dispatch} addPost={addPost}/>
     )
 }

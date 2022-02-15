@@ -1,7 +1,6 @@
-import React, {RefObject, Component} from 'react';
+import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
-
 
 import {ActionsTypes, RootStateType} from "../../../redux/state";
 

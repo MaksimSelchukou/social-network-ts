@@ -40,7 +40,7 @@ export type storeType = {
 export type ActionsTypes = AddPostActionType | UpdateNewMessageActionType | sendMessageBodyType
 
 
-export const store: storeType = {
+const store: storeType = {
     _state: {  //    RootStateType
         profilePage: {
             post: [

@@ -45,14 +45,3 @@ export const updateNewMessageBodyAC = (body: string): UpdateNewMessageActionType
     type: "UPDATE-NEW-MESSAGE-BODY",
     body: body
 });
-
-
-// else if (action.type === "SEND-MESSAGE") {
-//         let body = this._state.dialogsPage.newMessageBody
-//         this._state.dialogsPage.newMessageBody = ""
-//         this._state.dialogsPage.messages.push({id: 5, message: body})
-//         this._callSubscriber(this._state)
-//     } else if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
-//         this._state.dialogsPage.newMessageBody = action.body
-//         this._callSubscriber(this._state)
-//     }

@@ -9,7 +9,8 @@ import {store} from "./redux/redux-store";
 export let rerenderEntireTree = (state: RootStateType) => {
     ReactDOM.render(
         <React.StrictMode>
-            <App state={store.getState()} dispatch={store.dispatch.bind(store)}/>
+            {/*<App store={store} state={store.getState()} dispatch={store.dispatch.bind(store)}/>*/}
+            <App store={store}/>
         </React.StrictMode>,
         document.getElementById('root')
     );
@@ -21,6 +22,13 @@ store.subscribe(()=>{
     let state = store.getState()
     rerenderEntireTree(state)
 })
+
+// rerenderEntireTree(store.getState())
+//
+// store.subscribe(()=>{
+//     let state = store.getState()
+//     rerenderEntireTree(state)
+// })
 
 // store.subscribe(rerenderEntireTree);
 // reportWebVitals();

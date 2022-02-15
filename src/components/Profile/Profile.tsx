@@ -7,7 +7,7 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 type profileType = {
     // state: RootStateType
     // dispatch:(action:ActionsTypes)=>void
-    store:any
+    // store:any
 
 }
 
@@ -16,7 +16,8 @@ export const Profile = (props: profileType) => {
         <div>
             <ProfileInfo/>
             {/*<MyPostsContainer state={props.state} dispatch={props.dispatch}/>*/}
-            <MyPostsContainer store={props.store}/>
+            {/*<MyPostsContainer store={props.store}/>*/}
+            <MyPostsContainer/>
         </div>
     )
 }

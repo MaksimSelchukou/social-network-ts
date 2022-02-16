@@ -6,13 +6,13 @@ import {ActionsTypes, RootStateType} from "../../../redux/state";
 
 type myPostType = {
     state: RootStateType
-    dispatch: (action: ActionsTypes) => void
+    // dispatch: (action: ActionsTypes) => void
     addPost: (text:any) => void
 }
 
 const MyPosts = (props: myPostType) => {
     let postsElements
-        = props.state.profilePage.post.map(m => {
+        = props.state.profilePage.posts.map(m => {
         return (<Post message={m.message} likesCount={m.likesCount}/>)
     })
 

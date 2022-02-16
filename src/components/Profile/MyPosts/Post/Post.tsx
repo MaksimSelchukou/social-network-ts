@@ -10,7 +10,7 @@ const Post = (props:propsPostType) => {
 
     return (
         <div className={s.item}>
-            <img src='http://archilab.online/images/1/123.jpg' />
+            <img src='https://archilab.online/images/1/123.jpg' />
             { props.message }
             <div>
                 <span>like</span> { props.likesCount }

@@ -1,39 +1,22 @@
 import React from 'react';
 import {addPostAC} from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
-import StoreContext from '../../../StoreContext';
+import {connect} from "react-redux";
+import {storeType} from "../../../redux/redux-store";
 
-type myPostType = {
-    // state: RootStateType
-    // dispatch: (action: ActionsTypes) => void
-    // store:any
+
+
+let mapStateToProps = (state:storeType) => {
+    return {
+        state:state
+    }
+}
+let mapDispatchToProps = (dispatch:any) => {
+    return {
+        addPost:(text:any)=>{
+            dispatch(addPostAC(text))
+        }
+    }
 }
 
-export const MyPostsContainer = (props: myPostType) => {
-    // let state = props.store.getState()
-    //
-    //
-    // const addPost = (text: any) => {
-    //     props.store.dispatch(addPostAC(text))
-    // }
-
-    return (
-        <StoreContext.Consumer>
-            {
-                (store) => {
-                    let state = store.getState()
-
-
-                    const addPost = (text: any) => {
-                        store.dispatch(addPostAC(text))
-                    }
-                    return (
-                        <MyPosts state={state} dispatch={store.dispatch} addPost={addPost}/>
-                    )
-                }
-
-
-            }
-        </StoreContext.Consumer>
-    )
-}
+export const MyPostsContainer = connect(mapStateToProps,mapDispatchToProps)(MyPosts)

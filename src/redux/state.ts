@@ -15,8 +15,8 @@ export type PostType = {
     message: string
     likesCount: number
 }
-type ProfilePageType = {
-    post: Array<PostType>
+export type ProfilePageType = {
+    posts: Array<PostType>
 }
 type dialogsPageType = {
     dialogs: Array<DialogType>
@@ -43,7 +43,7 @@ export type ActionsTypes = AddPostActionType | UpdateNewMessageActionType | send
 const store: storeType = {
     _state: {  //    RootStateType
         profilePage: {
-            post: [
+            posts: [
                 {id: 1, message: "Hi, how are you?", likesCount: 0},
                 {id: 2, message: 'Its my first post', likesCount: 23},
                 {id: 3, message: 'Its my first post', likesCount: 21},

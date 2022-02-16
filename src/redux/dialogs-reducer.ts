@@ -20,7 +20,7 @@ export const dialogsReducer = (state: any = initialState, action: any): any => {
             let body = state.newMessageBody
             state.newMessageBody = ""
             state.messages.push({id: 5, message: body})
-            return state
+            return {...state}
         case "UPDATE-NEW-MESSAGE-BODY":
             state.newMessageBody = action.body
             return state
